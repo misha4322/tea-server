@@ -5,9 +5,10 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "build": "npm install --omit=dev",
     "start": "node server.js",
-    "migrate": "node migrate-db.js"
+    "migrate": "node migrate-db.js",
+    "build": "npm install",
+    "full-deploy": "npm run migrate && npm start"
   },
   "keywords": [],
   "author": "",
