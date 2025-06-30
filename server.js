@@ -1,3 +1,4 @@
+
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -6,7 +7,8 @@ import productsRouter from './routes/products.js';
 import favoritesRouter from './routes/favorites.js';
 import cartRouter from './routes/cart.js';
 import orderRouter from './routes/order.js';
-
+import https from 'https';
+import fs from 'fs';
 
 dotenv.config();
 
@@ -36,4 +38,14 @@ app.use('/api/favorites', favoritesRouter);
 
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Сервер запущен на порту ${PORT}`));
+if (process.env.NODE_ENV === 'production') {
+  app.listen(PORT, () => console.log(`Сервер запущен на порту ${PORT}`));
+} else {
+  // Для локальной разработки с SSL
+  https.createServer({
+    key: fs.readFileSync('server.key'),
+    cert: fs.readFileSync('server.cert')
+  }, app).listen(PORT, () => {
+    console.log(`Сервер с SSL запущен на порту ${PORT}`);
+  });
+}
