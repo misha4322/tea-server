@@ -14,7 +14,7 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-  origin: 'https://tea-client-zeta.vercel.app',
+  origin: 'https://teaclin.vercel.app/',
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'], 
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
