@@ -11,9 +11,6 @@ import https from 'https';
 import fs from 'fs';
 
 dotenv.config();
-
-
-
 const app = express();
 
 app.use(cors({
@@ -25,23 +22,16 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-
-
-
 app.use('/api/orders', orderRouter)
 app.use('/api/cart', cartRouter);
 app.use('/api/products', productsRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/favorites', favoritesRouter);
 
-
-
 const PORT = process.env.PORT || 5000;
 if (process.env.NODE_ENV === 'production') {
   app.listen(PORT, () => console.log(`Сервер запущен на порту ${PORT}`));
 } else {
-  // Для локальной разработки с SSL
   https.createServer({
     key: fs.readFileSync('server.key'),
     cert: fs.readFileSync('server.cert')
